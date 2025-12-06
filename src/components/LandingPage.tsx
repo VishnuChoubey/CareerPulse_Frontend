@@ -121,7 +121,7 @@ export default function LandingPage({ onAuth }: LandingPageProps) {
             Ready to Find Your Next Opportunity?
           </h2>
           <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-            Join thousands of job seekers who found their dream jobs with JobSpy
+            Join thousands of job seekers who found their dream jobs with CareerScout
           </p>
           <button
             onClick={() => setShowAuthModal(true)}
@@ -136,7 +136,7 @@ export default function LandingPage({ onAuth }: LandingPageProps) {
       <footer className="border-t border-gray-200 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-500">
-            <p>&copy; 2024 JobSpy. All rights reserved.</p>
+            <p>&copy; 2024 CareerScout. All rights reserved.</p>
           </div>
         </div>
       </footer>

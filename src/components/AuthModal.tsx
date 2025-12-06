@@ -63,7 +63,7 @@ export default function AuthModal({ isOpen, onClose, onAuth }: AuthModalProps) {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h2 className="text-3xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
-              {isLogin ? 'Welcome Back' : 'Join JobSpy'}
+              {isLogin ? 'Welcome Back' : 'Join CareerScout'}
             </h2>
             <p className="text-gray-600 mt-1">
               {isLogin ? 'Sign in to your account' : 'Create your account'}

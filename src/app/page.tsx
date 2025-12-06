@@ -64,7 +64,7 @@ export default function Home() {
             <div className="w-20 h-20 border-4 border-gray-200 rounded-full animate-spin border-t-violet-600 mx-auto mb-6"></div>
             <div className="absolute inset-0 w-20 h-20 border-4 border-transparent rounded-full animate-pulse border-t-yellow-500 mx-auto"></div>
           </div>
-          <p className="text-gray-900 text-lg font-medium">Loading JobSpy...</p>
+          <p className="text-gray-900 text-lg font-medium">Loading CareerScout...</p>
           <p className="text-gray-600 text-sm mt-2">Preparing your dashboard</p>
         </div>
       </div>
