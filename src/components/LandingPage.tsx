@@ -20,7 +20,7 @@ export default function LandingPage({ onAuth }: LandingPageProps) {
               <div className="w-10 h-10 bg-gradient-to-r from-violet-500 to-purple-600 rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold text-lg">J</span>
               </div>
-              <h1 className="text-2xl font-bold text-gray-900">JobSpy</h1>
+              <h1 className="text-2xl font-bold text-gray-900">CareerScout</h1>
             </div>
             <button
               onClick={() => setShowAuthModal(true)}
