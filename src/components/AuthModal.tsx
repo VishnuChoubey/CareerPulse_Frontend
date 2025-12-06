@@ -50,7 +50,7 @@ export default function AuthModal({ isOpen, onClose, onAuth }: AuthModalProps) {
       } else {
         setError(data.error || 'Authentication failed');
       }
-    } catch (error) {
+    } catch {
       setError('Network error. Please try again.');
     } finally {
       setLoading(false);

@@ -12,15 +12,17 @@ interface Job {
   max_amount?: number;
 }
 
+interface FilterState {
+  company: string;
+  location: string;
+  jobType: string;
+  salaryMin: number;
+}
+
 interface QuickFiltersProps {
   jobs: Job[];
-  onFilter: (filters: any) => void;
-  activeFilters: {
-    company: string;
-    location: string;
-    jobType: string;
-    salaryMin: number;
-  };
+  onFilter: (filters: FilterState) => void;
+  activeFilters: FilterState;
 }
 
 export default function QuickFilters({ jobs, onFilter, activeFilters }: QuickFiltersProps) {
@@ -32,7 +34,7 @@ export default function QuickFilters({ jobs, onFilter, activeFilters }: QuickFil
 
   useEffect(() => {
     onFilter(filters);
-  }, [filters]);
+  }, [filters, onFilter]);
 
   const clearFilters = () => {
     const emptyFilters = { company: '', location: '', jobType: '', salaryMin: 0 };

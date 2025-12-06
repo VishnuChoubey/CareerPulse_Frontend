@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface TargetCompany {
   _id: string;
@@ -17,13 +17,7 @@ export default function TargetCompanies({ userEmail }: TargetCompaniesProps) {
   const [newCompany, setNewCompany] = useState('');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (userEmail) {
-      fetchTargetCompanies();
-    }
-  }, [userEmail]);
-
-  const fetchTargetCompanies = async () => {
+  const fetchTargetCompanies = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/target-companies/${userEmail}`);
       const data = await response.json();
@@ -31,7 +25,13 @@ export default function TargetCompanies({ userEmail }: TargetCompaniesProps) {
     } catch (error) {
       console.error('Error fetching target companies:', error);
     }
-  };
+  }, [userEmail]);
+
+  useEffect(() => {
+    if (userEmail) {
+      fetchTargetCompanies();
+    }
+  }, [userEmail, fetchTargetCompanies]);
 
   const addTargetCompany = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -160,7 +160,7 @@ export default function TargetCompanies({ userEmail }: TargetCompaniesProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
           <div className="flex items-start space-x-2">
             <span className="text-gray-400">•</span>
-            <span>Add companies you're interested in</span>
+            <span>Add companies you&apos;re interested in</span>
           </div>
           <div className="flex items-start space-x-2">
             <span className="text-gray-400">•</span>

@@ -38,7 +38,7 @@ export default function UserAuth({ onUserRegistered }: UserAuthProps) {
       } else {
         setMessage(data.error || 'Registration failed');
       }
-    } catch (err) {
+    } catch {
       setMessage('Registration failed. Please try again.');
     } finally {
       setLoading(false);

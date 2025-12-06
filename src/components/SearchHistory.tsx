@@ -8,9 +8,19 @@ interface SearchHistoryItem {
   resultsCount: number;
 }
 
+interface SearchParams {
+  search_term: string;
+  location: string;
+  sites: string[];
+  results_wanted: number;
+  hours_old: number;
+  job_type: string | null;
+  is_remote: boolean;
+}
+
 interface SearchHistoryProps {
   history: SearchHistoryItem[];
-  onRepeatSearch: (params: any) => void;
+  onRepeatSearch: (params: SearchParams) => void;
 }
 
 export default function SearchHistory({ history, onRepeatSearch }: SearchHistoryProps) {
@@ -20,7 +30,9 @@ export default function SearchHistory({ history, onRepeatSearch }: SearchHistory
       location: item.location === 'Any' ? '' : item.location,
       sites: ['indeed', 'linkedin'],
       results_wanted: 25,
-      hours_old: 24
+      hours_old: 24,
+      job_type: null,
+      is_remote: false
     });
   };
 

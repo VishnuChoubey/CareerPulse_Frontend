@@ -45,7 +45,7 @@ export default function Home() {
           setUserName(data.user.name);
           setIsAuthenticated(true);
         }
-      } catch (error) {
+      } catch {
         console.log('Not authenticated');
       } finally {
         setIsLoading(false);

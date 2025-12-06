@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface JobAlert {
   _id: string;
@@ -22,7 +22,6 @@ interface JobAlertsProps {
 export default function JobAlerts({ userEmail }: JobAlertsProps) {
   const [alerts, setAlerts] = useState<JobAlert[]>([]);
   const [showForm, setShowForm] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [newAlert, setNewAlert] = useState({
     searchTerm: '',
     location: '',
@@ -32,13 +31,7 @@ export default function JobAlerts({ userEmail }: JobAlertsProps) {
     jobRole: ''
   });
 
-  useEffect(() => {
-    if (userEmail) {
-      fetchAlerts();
-    }
-  }, [userEmail]);
-
-  const fetchAlerts = async () => {
+  const fetchAlerts = useCallback(async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/alerts/${userEmail}`);
       const data = await response.json();
@@ -46,7 +39,13 @@ export default function JobAlerts({ userEmail }: JobAlertsProps) {
     } catch (error) {
       console.error('Failed to fetch alerts:', error);
     }
-  };
+  }, [userEmail]);
+
+  useEffect(() => {
+    if (userEmail) {
+      fetchAlerts();
+    }
+  }, [userEmail, fetchAlerts]);
 
 
 
@@ -54,7 +53,6 @@ export default function JobAlerts({ userEmail }: JobAlertsProps) {
     e.preventDefault();
     if (!newAlert.searchTerm.trim()) return;
 
-    setLoading(true);
     try {
       const response = await fetch('http://localhost:5000/api/alerts', {
         method: 'POST',
@@ -84,8 +82,6 @@ export default function JobAlerts({ userEmail }: JobAlertsProps) {
       }
     } catch (error) {
       console.error('Failed to create alert:', error);
-    } finally {
-      setLoading(false);
     }
   };
 

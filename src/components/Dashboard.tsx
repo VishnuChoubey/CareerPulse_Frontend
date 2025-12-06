@@ -40,11 +40,23 @@ interface SearchHistoryItem {
   resultsCount: number;
 }
 
+interface SearchParams {
+  search_term: string;
+  location: string;
+  job_type: string | null;
+  hours_old: number;
+  results_wanted: number;
+  sites: string[];
+  is_remote: boolean;
+}
+
 interface DashboardProps {
   userEmail: string;
   userName: string;
   onLogout: () => void;
 }
+
+type TabId = 'search' | 'bookmarks' | 'targets' | 'history' | 'alerts';
 
 export default function Dashboard({ userEmail, userName, onLogout }: DashboardProps) {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -72,7 +84,7 @@ export default function Dashboard({ userEmail, userName, onLogout }: DashboardPr
     }
   }, []);
 
-  const handleSearch = async (searchParams: any) => {
+  const handleSearch = async (searchParams: SearchParams) => {
     setLoading(true);
     setError(null);
     
@@ -112,7 +124,7 @@ export default function Dashboard({ userEmail, userName, onLogout }: DashboardPr
     }
   };
 
-  const handleQuickFilter = (filters: typeof quickFilters) => {
+  const handleQuickFilter = (filters: { company: string; location: string; jobType: string; salaryMin: number }) => {
     setQuickFilters(filters);
     let filtered = jobs;
     
@@ -228,7 +240,7 @@ export default function Dashboard({ userEmail, userName, onLogout }: DashboardPr
           ].map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
+              onClick={() => setActiveTab(tab.id as TabId)}
               className={`flex items-center space-x-2 px-4 py-2 rounded-md font-medium transition-all ${
                 activeTab === tab.id
                   ? 'bg-gray-900 text-white'

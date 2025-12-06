@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface Job {
   _id: string;
@@ -21,7 +21,7 @@ export default function JobBookmarks({ userEmail }: JobBookmarksProps) {
   const [bookmarks, setBookmarks] = useState<Job[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchBookmarks = async () => {
+  const fetchBookmarks = useCallback(async () => {
     if (!userEmail) return;
     
     setLoading(true);
@@ -37,32 +37,11 @@ export default function JobBookmarks({ userEmail }: JobBookmarksProps) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [userEmail]);
 
   useEffect(() => {
     fetchBookmarks();
-  }, [userEmail]);
-
-  const bookmarkJob = async (job: any) => {
-    try {
-      const response = await fetch('http://localhost:5000/api/bookmarks/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          user_email: userEmail,
-          job_data: job
-        }),
-      });
-
-      if (response.ok) {
-        fetchBookmarks(); // Refresh bookmarks
-      }
-    } catch (err) {
-      console.error('Failed to bookmark job:', err);
-    }
-  };
+  }, [userEmail, fetchBookmarks]);
 
   if (!userEmail) {
     return (

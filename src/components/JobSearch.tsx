@@ -2,8 +2,18 @@
 
 import { useState } from 'react';
 
+interface SearchParams {
+  search_term: string;
+  location: string;
+  job_type: string | null;
+  hours_old: number;
+  results_wanted: number;
+  sites: string[];
+  is_remote: boolean;
+}
+
 interface JobSearchProps {
-  onSearch: (params: any) => void;
+  onSearch: (params: SearchParams) => void;
   loading: boolean;
 }
 
