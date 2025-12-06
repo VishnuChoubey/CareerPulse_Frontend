@@ -206,7 +206,7 @@ export default function Dashboard({ userEmail, userName, onLogout }: DashboardPr
                 <span className="text-white font-bold text-lg">J</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">JobSpy</h1>
+                <h1 className="text-xl font-bold text-gray-900">CareerPulse</h1>
                 <p className="text-xs text-gray-500">Professional Job Search</p>
               </div>
             </div>
